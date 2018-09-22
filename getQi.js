@@ -9,28 +9,28 @@ if (typeof web3 !== 'undefined') {
 
 
 
+var collection = "0xBd032F08e6CCcF634bB96b4f61D6e8E466387FA8"
 var wallet = "0xBd032F08e6CCcF634bB96b4f61D6e8E466387FA8"
 
 
-
-function getIssuedQis(wallet){
+function getIssuedQis(collection, wallet){
   var registry = require('./constats/addr.json');
   var qiRegistry = require('./contracts/qiRegistry.json');
   var contract = new web3.eth.Contract(qiRegistry.abi, registry.qiRegistry);
-  contract.methods.getEmitterQis(wallet).call({from: wallet}, function(error, result){
+  contract.methods.getEmitterQis(collection).call({from: wallet}, function(error, result){
       console.log(result)
   });
 }
 
-function getMyQis(wallet){
+function getMyQis(collection, wallet){
   var registry = require('./constats/addr.json');
   var qiRegistry = require('./contracts/qiRegistry.json');
   var contract = new web3.eth.Contract(qiRegistry.abi, registry.qiRegistry);
-  contract.methods.getReceiverQis(wallet).call({from: wallet}, function(error, result){
+  contract.methods.getReceiverQis(collection).call({from: wallet}, function(error, result){
       console.log(result)
   });
 }
 
-getIssuedQis(wallet);
+getIssuedQis(collection, wallet);
 
-getMyQis(wallet);
+getMyQis(collection, wallet);
